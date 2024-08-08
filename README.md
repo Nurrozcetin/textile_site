@@ -1,0 +1,1 @@
+Various problems that have been entered, reasons, solutions, suppliers, history etc. A structure that can be edited with a form in which multiple data can be displayed and deleted when necessary. It also reveals the company's diverse products.
