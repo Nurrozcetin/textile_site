@@ -1,0 +1,73 @@
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'uniteks/css/style.css' %}">
+    <style>
+        .card {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .btn {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+        .new-btn {
+            padding: 10px 20px;
+        }
+    </style>
+{% endblock css_files %}
+
+{% block title %}
+   Event List
+{% endblock title %}
+
+{% block content %}
+    <i class="fa-solid fa-bug"></i>
+    <div class="container mt-3">
+        <div class="row">
+            {% for event in page_obj.object_list %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ event.image.url }}" class="card-img" alt="Event Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.model }}</h5>
+                            <p class="card-text">{{ event.orderNo }}</p>
+                            <p class="card-text">{{ event.error }}</p>
+                            <p class="card-text">{{ event.result }}</p>
+                            <p>{{ event.date|date:'SHORT_DATE_FORMAT' }}</p>
+                            <div class="btn-container">
+                                <a href="{% url "event_edit" event.id %}" class="btn btn-warning btn-sm">Update</a>
+                                <a href="{% url "event_delete" event.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-warning">No events found</div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-end mt-3">
+            <a href="{% url "event_create" %}" class="btn btn-success new-btn">New Event</a>
+        </div>
+    </div>
+{% endblock content %}

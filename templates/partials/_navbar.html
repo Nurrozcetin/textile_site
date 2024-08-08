@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-orange">
+    <div class="container">
+        <a href="#" class="navbar-brand">Textile Shop</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "items" %}" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url "event_list" %}" class="nav-link">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav me-1">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Welcome, {{user.username}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "logout" %}" class="nav-link">Logout</a>
+                    </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'register' %}" class="nav-link">Register</a>
+                </li>
+                {% endif %}
+
+                
+            </ul>
+
+            <form class="d-flex" action="{% url 'search' %}">
+                <input class="form-control me-1" type="text" name="q" placeholder="Search">
+                <button type="submit" class="btn btn-outline-light">Search</button>
+            </form>
+        </div>    
+    </div>
+</nav>

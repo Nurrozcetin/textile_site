@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'uniteks/css/style.css' %}">
+{% endblock css_files %}
+
+{% block title %}
+   {{ item.title }}
+{% endblock title %}
+
+{% block content %}
+    <i class="fa-solid fa-bug"></i>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 ">
+                <h1>Register</h1>
+                    <hr>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        
+                        {% include "partials/_form.html" %}
+
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>               
+            </div>
+        </div>
+    </div>
+{% endblock content %}
