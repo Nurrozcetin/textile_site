@@ -61,7 +61,7 @@ def getEventsByCustomer(request, name):
     page_obj = paginator.page(page)
 
     return render(request, 'events/event_list.html', {
-        'customers': customers, 
+        'customers': customers,
         'page_obj': page_obj,
         'choosenCustomer': name,
     })
@@ -73,3 +73,14 @@ def details_event(request, id):
         'event': event_details
     }
     return render(request, "events/event_details.html", context)
+
+def search(request):
+    if "q" in request.GET and request.GET["q"] != " ":
+        q = request.GET["q"]
+        q_event = Event.objects.filter(error__contains=q).order_by("date")
+    else:
+        return redirect("event_list")
+
+    return render(request, 'events/search.html', {
+        'events': q_event,
+    })

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Search Results
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'uniteks/css/style.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+    <i class="fa-solid fa-bug"></i>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 ">
+                {% if events|length == 0 %}
+                <div class="alert alert-warning">Event Not Found</div>
+                {% else %}
+                    {% for event in events %}
+                        {% include "events/partials/_event.html" %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

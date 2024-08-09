@@ -6,9 +6,17 @@
         </div>
         <div class="col-8">
             <div class="card-body">
-                <h5 class="card-title"> {{ event.model }} </h5>
-                <p class="card-text">{{ event.error}}</p>
-                <p>{{ event.date|date:'SHORT_DATE_FORMAT' }}</p>
+                <h1 class="h3">{{ event.model }}</h1>
+                <ul class="list-unstyled">
+                    <li><strong>Order No:</strong> {{ event.orderNo }}</li>
+                    <li><strong>Error:</strong> {{ event.error }}</li>
+                    <li><strong>Supplier:</strong> {{ event.supplier }}</li>
+                    <li><strong>Error Source:</strong> {{ event.errorSource }}</li>
+                    <li><strong>Detection Method:</strong> {{ event.detectionMethod }}</li>
+                    <li><strong>Action:</strong> {{ event.action }}</li>
+                    <li><strong>Result:</strong> {{ event.result }}</li>
+                    <li><strong>Action For Repeat:</strong> {{ event.actionForRepeat }}</li>
+                </ul>
             </div>
         </div>
     </div>

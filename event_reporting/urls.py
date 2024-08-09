@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit/<int:id>', views.edit_event, name="event_edit"),
     path('customer/<str:name>/', views.getEventsByCustomer, name='events_by_customer'),
     path('details/<int:id>', views.details_event, name="event_details"),
+    path('search/', views.search, name="search"),
 ]

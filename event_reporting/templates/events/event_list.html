@@ -1,27 +1,25 @@
 {% extends "layout.html" %}
-
 {% load static %}
+
+{% block title %}
+    Events
+{% endblock title %}
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static 'uniteks/css/style.css' %}}">
 {% endblock css_files %}
 
-{% block title %}
-   {{ event.title }}
-{% endblock title %}
-
 {% block content %}
     <i class="fa-solid fa-bug"></i>
     <div class="container mt-3">
         <div class="row">
-            {% comment %} <div class="col-3">
+             <div class="col-3">
                 {% include "events/partials/_customers.html" %}
-            </div> {% endcomment %}
-            <div class="col-12">
+            </div> 
+            <div class="col-9">
                 {% if page_obj.object_list|length == 0 %}
-                <div class="alert alert-warning">Event Not Found</div>
+                    <div class="alert alert-warning">Event Not Found</div>
                 {% endif %}
-
 
                 {% include "events/partials/_events.html" %}
 
