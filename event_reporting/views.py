@@ -9,7 +9,6 @@ from .models import Customer, Event
 def isAdmin(user):
     return user.is_superuser
 
-#@user_passes_test(isAdmin)
 def create_event(request):
     if request.method == "POST":
         form = EventCreateForm(request.POST, request.FILES)
@@ -21,7 +20,7 @@ def create_event(request):
         form = EventCreateForm()
     return render(request, "events/event_create.html", {"form":form})
 
-#@user_passes_test(isAdmin)
+@user_passes_test(isAdmin)
 def delete_event(request, id):
     event_delete = get_object_or_404(Event, pk=id)
     if request.method=="POST":
@@ -30,7 +29,6 @@ def delete_event(request, id):
     else:
          return render(request, "events/event_delete.html", {"event":event_delete})
 
-#@user_passes_test(isAdmin)
 def list_event(request):
     events = Event.objects.all().order_by('date')
     paginator = Paginator(events, 3)
@@ -41,7 +39,7 @@ def list_event(request):
         'page_obj': page_obj,   
     })
 
-#@user_passes_test(isAdmin)
+@user_passes_test(isAdmin)
 def edit_event(request, id):
     event_edit = get_object_or_404(Event, pk=id)
     if request.method == "POST":
@@ -56,14 +54,14 @@ def edit_event(request, id):
 
 def getEventsByCustomer(request, name):
     events = Event.objects.filter(customer__name=name).order_by("date")
-    customer = Customer.objects.all()
+    customers = Customer.objects.all()
 
     paginator = Paginator(events, 3)
     page = request.GET.get('page', 1)
     page_obj = paginator.page(page)
 
     return render(request, 'events/event_list.html', {
-        'customer': customer, 
+        'customers': customers, 
         'page_obj': page_obj,
         'choosenCustomer': name,
     })

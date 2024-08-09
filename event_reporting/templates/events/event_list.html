@@ -14,10 +14,10 @@
     <i class="fa-solid fa-bug"></i>
     <div class="container mt-3">
         <div class="row">
-            <div class="col-3">
+            {% comment %} <div class="col-3">
                 {% include "events/partials/_customers.html" %}
-            </div>
-            <div class="col-9">
+            </div> {% endcomment %}
+            <div class="col-12">
                 {% if page_obj.object_list|length == 0 %}
                 <div class="alert alert-warning">Event Not Found</div>
                 {% endif %}
