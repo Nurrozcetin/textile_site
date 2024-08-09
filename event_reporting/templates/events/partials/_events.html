@@ -49,6 +49,13 @@
                         <img src="{{ event.image.url }}" class="card-img" alt="Event Image">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.model }}</h5>
+                            <p class="card-text">
+                                {% for cust in event.customer.all %}
+                                    {{ cust.name }}{% if not forloop.last %}, {% endif %}
+                                {% empty %}
+                                    No customer
+                                {% endfor %}
+                            </p>
                             <p class="card-text">{{ event.orderNo }}</p>
                             <p class="card-text">{{ event.error }}</p>
                             <p class="card-text">{{ event.result }}</p>

@@ -1,0 +1,7 @@
+<div class="list-group">
+    {% for cust in customer %}
+        <a href="{% url 'events_by_customer' cust.name %}" 
+        class="list-group-item list-group-item-action {% if choosenCustomer == cust.name %}active{% endif %}">
+        {{ cust.name|title }}</a>
+    {% endfor %}
+</div>

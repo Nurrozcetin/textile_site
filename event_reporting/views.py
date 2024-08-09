@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from event_reporting.forms import EventCreateForm
 from django.core.paginator import Paginator
-from .models import Event
+from .models import Customer, Event
 
 
 def isAdmin(user):
@@ -46,9 +46,24 @@ def edit_event(request, id):
     event_edit = get_object_or_404(Event, pk=id)
     if request.method == "POST":
         form = EventCreateForm(request.POST, request.FILES, instance=event_edit)
-        form.save()
-        return redirect("event_list")
+        if form.is_valid():
+            form.save()
+            return redirect("event_list")
     else:
         form = EventCreateForm(instance=event_edit)
     
     return render(request, "events/event_edit.html", {"form":form})
+
+def getEventsByCustomer(request, name):
+    events = Event.objects.filter(customer__name=name).order_by("date")
+    customer = Customer.objects.all()
+
+    paginator = Paginator(events, 3)
+    page = request.GET.get('page', 1)
+    page_obj = paginator.page(page)
+
+    return render(request, 'events/event_list.html', {
+        'customer': customer, 
+        'page_obj': page_obj,
+        'choosenCustomer': name,
+    })
