@@ -67,3 +67,11 @@ def getEventsByCustomer(request, name):
         'page_obj': page_obj,
         'choosenCustomer': name,
     })
+
+
+def details_event(request, id):
+    event_details = get_object_or_404(Event, pk=id)
+    context = {
+        'event': event_details
+    }
+    return render(request, "events/event_details.html", context)

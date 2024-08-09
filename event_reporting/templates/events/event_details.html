@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'uniteks/css/style.css' %}">
+    <style>
+        h1.h3 {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin-bottom: 20px; /* Başlık altında boşluk */
+        }
+
+        .list-unstyled li {
+            margin-bottom: 15px; /* Her liste elemanı arasında boşluk */
+            color: #555;
+            font-size: 16px;
+        }
+        
+        .list-unstyled li strong {
+            color: #000;
+        }
+        
+        img.rounded {
+            margin-bottom: 20px;
+        }
+        
+        .container.mt-5 {
+            margin-top: 50px;
+        }
+        
+        .row .col-md-8 {
+            padding-left: 30px;
+        }
+        
+        i.fa-solid.fa-bug {
+            color: #FF5733;
+            font-size: 24px;
+            margin-right: 10px;
+            margin-bottom: 20px; /* İkon altında boşluk */
+        }
+        
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .card-text {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+{% endblock css_files %}
+
+{% block title %}
+   {{ event.title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 mb-3">
+                <img class="img-fluid rounded" src="{{ event.image.url }}" alt="{{ event.model }}">
+            </div>
+            <div class="col-md-8 col-sm-12 mb-9">
+                <h1 class="h3">{{ event.model }}</h1>
+                <ul class="list-unstyled">
+                    <li><strong>Order No:</strong> {{ event.orderNo }}</li>
+                    <li><strong>Error:</strong> {{ event.error }}</li>
+                    <li><strong>Supplier::</strong> {{ event.supplier }}</li>
+                    <li><strong>Error Source:</strong> {{ event.errorSource }}</li>
+                    <li><strong>Detection Method:</strong> {{ event.detectionMethod }}</li>
+                    <li><strong>Action:</strong> {{ event.action }}</li>
+                    <li><strong>Result:</strong> {{ event.result }}</li>
+                    <li><strong>Action For Repeat:</strong> {{ event.actionForRepeat }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
